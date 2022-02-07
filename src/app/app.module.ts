@@ -1,3 +1,9 @@
+import { AbstractAuthApiService } from "@/api/abstract-auth-api.service";
+import { AuthApiService } from "@/api/auth-api.service";
+import { httpInterceptorProviders } from "@/interceptors";
+import { RedirectComponent } from "@/pages/redirect/redirect.component";
+import { AppStoreModule } from "@/store/app-store.module";
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,13 +12,19 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    AppStoreModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders,
+    { provide: AbstractAuthApiService, useClass: AuthApiService },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
