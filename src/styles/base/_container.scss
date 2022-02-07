@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1800px;
+  padding: 0 24px;
+}
+
+.container-title {
+  margin-bottom: 94px;
+  text-align: center;
+}
