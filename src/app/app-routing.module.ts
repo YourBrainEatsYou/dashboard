@@ -1,6 +1,6 @@
-import { AppComponent } from "@/app.component";
 import { IsAuthenticatedGuard } from "@/guards/is-authenticated.guard";
 import { KeyExchangeGuard } from "@/guards/key-exchange.guard";
+import { DashboardComponent } from "@/pages/dashboard/dashboard.component";
 import { RedirectComponent } from "@/pages/redirect/redirect.component";
 import { NgModule, InjectionToken } from '@angular/core';
 import { RouterModule, Routes, ActivatedRouteSnapshot } from '@angular/router';
@@ -10,7 +10,7 @@ const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: AppComponent,
+    component: DashboardComponent,
     canLoad: [
       IsAuthenticatedGuard
     ],

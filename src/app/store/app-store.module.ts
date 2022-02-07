@@ -1,4 +1,5 @@
 import { AuthStoreModule } from '@/store/auth/auth-store.module';
+import { metaReducers } from "@/store/meta-reducers";
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -8,9 +9,9 @@ import { environment } from '../../environments/environment';
 @NgModule({
   declarations: [],
   imports: [
-    StoreModule.forRoot({} ),
+    StoreModule.forRoot({}, {metaReducers}),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({maxAge: 25}) : [],
     AuthStoreModule
   ]
 })

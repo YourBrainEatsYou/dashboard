@@ -1,5 +1,7 @@
 import { AbstractAuthApiService } from "@/api/abstract-auth-api.service";
 import { AuthApiService } from "@/api/auth-api.service";
+import { HeaderModule } from "@/components/header/header.module";
+import { NavigationModule } from "@/components/navigation/navigation.module";
 import { httpInterceptorProviders } from "@/interceptors";
 import { RedirectComponent } from "@/pages/redirect/redirect.component";
 import { AppStoreModule } from "@/store/app-store.module";
@@ -9,17 +11,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RedirectComponent
+    RedirectComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AppStoreModule
+    AppStoreModule,
+    HeaderModule,
+    NavigationModule
   ],
   providers: [
     httpInterceptorProviders,

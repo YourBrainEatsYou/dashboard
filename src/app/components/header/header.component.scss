@@ -1,0 +1,51 @@
+@use "../../../styles/abstracts/index" as *;
+@use "../../../styles/elements/button";
+
+:host {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px 0;
+  background-color: $color-white;
+  @include shadow;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: currentColor;
+
+  .icon {
+    padding: 6px;
+
+    span {
+      font-size: 26px;
+      @include for-tablet-landscape-up {
+        font-size: 36px;
+      }
+    }
+  }
+
+  .text {
+    font-size: 20px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+
+    @include for-tablet-landscape-up {
+      font-size: 30px;
+    }
+  }
+}
