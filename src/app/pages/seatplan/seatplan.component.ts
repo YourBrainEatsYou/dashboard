@@ -1,11 +1,6 @@
+import { SeatType } from "@/enums/seat-type";
+import { Seat } from "@/interfaces/seat";
 import { Component, OnInit } from '@angular/core';
-
-interface Seat {
-  id: string;
-  x: number;
-  y: number;
-}
-
 
 @Component({
   selector: 'app-seatplan',
@@ -13,6 +8,9 @@ interface Seat {
   styleUrls: ['./seatplan.component.scss']
 })
 export class SeatplanComponent implements OnInit {
+
+
+  selectedSeat: Seat | null = null;
 
   private xAxis = [
     {id: 'a', offset: 216},
@@ -25,8 +23,8 @@ export class SeatplanComponent implements OnInit {
     {id: 'h', offset: 1080},
     {id: 'i', offset: 1176},
     {id: 'j', offset: 1320},
-    {id: 'k', offset: 1416},
-    {id: 'l', offset: 1560},
+  //  {id: 'k', offset: 1416},
+  //  {id: 'l', offset: 1560},
   ];
 
   private yAxis = [
@@ -37,24 +35,56 @@ export class SeatplanComponent implements OnInit {
     {id: 5, offset: 576},
     {id: 6, offset: 672},
     {id: 7, offset: 768},
+  ];
 
+  private specialX = [
+    {id: 'k', offset: 1416},
+    {id: 'l', offset: 1560},
+  ];
+
+  private specialY = [
+    {id: 1, offset: 48},
+    {id: 2, offset: 144},
+    {id: 3, offset: 240},
+    {id: 4, offset: 672},
+    {id: 5, offset: 768},
   ]
-
 
   seats: Seat[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    // regular Rows
     this.xAxis.forEach((xAxis) => {
       this.yAxis.forEach((yAxis) => {
         this.seats.push({
           id: `${xAxis.id.toUpperCase()}${yAxis.id.toString(10)}`,
           x: xAxis.offset,
-          y: yAxis.offset
+          y: yAxis.offset,
+          type: SeatType.AVAILABLE
+        });
+      })
+    });
+
+    // Rows K & L
+    this.specialX.forEach((xAxis) => {
+      this.specialY.forEach((yAxis) => {
+        this.seats.push({
+          id: `${xAxis.id.toUpperCase()}${yAxis.id.toString(10)}`,
+          x: xAxis.offset,
+          y: yAxis.offset,
+          type: SeatType.AVAILABLE
         });
       })
     });
   };
 
+  onSeatSelection(seat: Seat): void{
+    if(this.selectedSeat && seat.id === this.selectedSeat.id){
+      this.selectedSeat = null;
+    }else{
+      this.selectedSeat = seat;
+    }
+  }
 }
