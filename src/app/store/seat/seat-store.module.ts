@@ -1,6 +1,8 @@
+import { seatFeatureKey, reducer } from "@/store/seat/seat.reducer";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from "@ngrx/store";
 import { SeatEffects } from './seat.effects';
 
 
@@ -9,6 +11,7 @@ import { SeatEffects } from './seat.effects';
   declarations: [],
   imports: [
     CommonModule,
+    StoreModule.forFeature(seatFeatureKey, reducer),
     EffectsModule.forFeature([SeatEffects])
   ]
 })

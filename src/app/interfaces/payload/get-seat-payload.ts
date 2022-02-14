@@ -1,6 +1,7 @@
-import { SeatType } from "@/enums/seat-type";
+import { SeatStatus } from "@/enums/seat-status";
 
 export interface GetSeatPayload {
-  id: string;
-  type: SeatType;
+  seat: string;
+  availability?: SeatStatus;
+  userData?: {},
 }

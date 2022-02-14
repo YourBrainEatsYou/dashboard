@@ -2,7 +2,6 @@ import { IsAuthenticatedGuard } from "@/guards/is-authenticated.guard";
 import { KeyExchangeGuard } from "@/guards/key-exchange.guard";
 import { DashboardComponent } from "@/pages/dashboard/dashboard.component";
 import { RedirectComponent } from "@/pages/redirect/redirect.component";
-import { SeatplanComponent } from "@/pages/seatplan/seatplan.component";
 import { NgModule, InjectionToken } from '@angular/core';
 import { RouterModule, Routes, ActivatedRouteSnapshot } from '@angular/router';
 
@@ -25,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'seatplan',
-    component: SeatplanComponent,
+    loadChildren: () => import('./pages/seatplan/seatplan.module').then((m) => m.SeatplanModule),
     canLoad: [
       IsAuthenticatedGuard
     ],

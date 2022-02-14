@@ -44,22 +44,27 @@
     }
   }
 
-
-
-  &--active{
-    fill: $color-primary-accent !important;
+  &--taken{
+    fill: $color-primary-dark;
   }
-  &--disabled{
+
+  &--me{
+    fill: $color-primary-light;
+  }
+
+  &--blocked{
     cursor: not-allowed;
     stroke: $color-gray;
     fill: $color-white;
     stroke-width: 2;
   }
+
   &--squad{
     fill: $color-secondary-dark;
   }
-  &--my{
-    fill: $color-primary-light;
+
+  &--active{
+    fill: $color-primary-accent !important;
   }
 }
 
@@ -70,4 +75,40 @@
 
 .area-legend{
   fill: $color-white;
+}
+
+.tooltip{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+  @include shadow();
+  border-radius: 3rem;
+  background-color: $color-white;
+  position: absolute;
+
+  &:before{
+    content: '';
+    height: 1.8rem;
+    width: 1.8rem;
+    transform-origin: center center;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg) ;
+    background-color: $color-white;
+    position: absolute;
+    top: 0;
+    left: 50%;
+  }
+  &--avatar{
+    position: relative;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background-color: red;
+    z-index: 1;
+  }
+  &--username{
+    position: relative;
+    z-index: 1;
+  }
 }

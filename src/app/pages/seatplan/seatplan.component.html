@@ -1,12 +1,17 @@
 <h1>book your seat</h1>
 
 <svg class="seatplan" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 960">
-  <g id="seats_mapped">
+  <g id="seats_mapped" *ngIf="(seats$ | async) as seats">
     <circle
       *ngFor="let seat of seats"
       class="seat seat--available"
       [ngClass]="{
-        'seat--active': selectedSeat && seat.id === selectedSeat.id
+        'seat--active': selectedSeat && seat.seat === selectedSeat.seat,
+        'seat--available': seat.availability === seatStatus.AVAILABLE,
+        'seat--taken': seat.availability === seatStatus.TAKEN,
+        'seat--me': seat.availability === seatStatus.ME,
+        'seat--blocked': seat.availability === seatStatus.BLOCKED,
+        'seat--squad': seat.availability === seatStatus.SQUAD
       }"
       [attr.cx]="seat.x"
       [attr.cy]="seat.y"
@@ -141,7 +146,18 @@
   </g>
 </svg>
 
+<div class="tooltip">
+  <div class="tooltip--avatar">
+    <img src="https://avatars.dicebear.com/api/gridy/stui.svg" alt="">
+  </div>
+  <div class="user">
+    [IOL] stui
+  </div>
+</div>
+
 <div class="card card--dense selection" *ngIf="selectedSeat">
-  <div class="selected-seat">Seat: {{selectedSeat.id}}</div>
-  <button class="button button--primary">Save</button>
+  <div class="selected-seat">Seat: {{selectedSeat.seat}}</div>
+  <button class="button button--primary" (click)="onReserveSeat()" [disabled]="(isPosting$ | async)" [ngClass]="{'button--loading': (isPosting$ | async)}">
+    Save
+  </button>
 </div>
