@@ -1,1 +1,83 @@
-/* You can add global styles to this file, and also import other style files */
+@use "abstracts" as *;
+
+@use "base/normalize";
+@use "base/typographie";
+@use "base/container";
+
+@use "elements/form";
+@use "elements/button";
+@use "elements/card";
+
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;800&display=swap&family=Material+Icons+Outlined');
+
+.material-icons-outlined {
+  display: block;
+}
+
+@keyframes show-bg {
+  0% {
+    opacity: 0;
+    left: -100vw;
+  }
+  100% {
+    opacity: 1;
+    left: -50vw;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Changa", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  // scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.375;
+  display: flex;
+  flex-direction: column;
+}
+
+
+body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
