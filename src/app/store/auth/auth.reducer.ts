@@ -30,7 +30,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(setTokenCollection, (state: State, { tokenCollection }) => {
+  on(setTokenCollection, (state: State, {tokenCollection}) => {
     return {
       ...state,
       ...tokenCollection
@@ -48,7 +48,7 @@ export const reducer = createReducer(
       isRenewing: true
     };
   }),
-  on(renewAccessTokenSuccess, (state: State, { tokenCollection }) => {
+  on(renewAccessTokenSuccess, (state: State, {tokenCollection}) => {
     return {
       ...state,
       isRenewing: false,

@@ -9,11 +9,12 @@ import { Observable, first } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class SeatApiService implements AbstractSeatApiService{
+export class SeatApiService implements AbstractSeatApiService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   getSeats(): Observable<Payload<GetSeatPayload[]>> {
     return this.http.get<Payload<GetSeatPayload[]>>('/seat/list').pipe(first());

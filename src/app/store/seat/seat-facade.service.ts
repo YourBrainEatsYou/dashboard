@@ -1,5 +1,4 @@
 import { AbstractSeatApiService } from "@/api/abstract-seat-api.service";
-import { SeatStatus } from "@/enums/seat-status";
 import { ReserveSeatDto } from "@/interfaces/dto/reserve-seat-dto";
 import { Seat } from "@/interfaces/seat";
 import { AppState } from "@/store/app.state";
@@ -22,7 +21,7 @@ export class SeatFacadeService extends FacadeService {
     switchMap(() => this.seatApiService.getSeats().pipe(
       tap((payload) => {
         // merge the seats
-        const {seats, seatsMap} = this.prepareSeats()
+        const {seats, seatsMap} = this.prepareSeats();
 
         const mergedSeats = payload.data.map((payloadSeat) => {
           const preparedSeat = seats[seatsMap.indexOf(payloadSeat.seat)];
@@ -37,27 +36,27 @@ export class SeatFacadeService extends FacadeService {
 
         const mergedSeatsPayload = {
           ...payload,
-          data: mergedSeats,
-        }
+          data: mergedSeats
+        };
 
         this.store.dispatch({type: SeatStoreActions.loadSeatsSuccess.type, payload: mergedSeatsPayload});
       })
-    )),
+    ))
   );
 
   isPosting$ = this.muteFirst(
     this.requireSeats$.pipe(startWith(null)),
-    this.store.select(SeatStoreSelectors.selectIsPosting),
-  )
+    this.store.select(SeatStoreSelectors.selectIsPosting)
+  );
 
   seats$ = this.muteFirst(
     this.requireSeats$.pipe(startWith(null)),
-    this.store.select(SeatStoreSelectors.selectAll),
+    this.store.select(SeatStoreSelectors.selectAll)
   );
 
   constructor(
     private store: Store<AppState>,
-    private seatApiService: AbstractSeatApiService,
+    private seatApiService: AbstractSeatApiService
   ) {
     super();
   }
@@ -66,7 +65,7 @@ export class SeatFacadeService extends FacadeService {
     this.store.dispatch({type: SeatStoreActions.reserveSeat.type, reserveSeatDto});
   }
 
-  private prepareSeats(): {seats: Seat[], seatsMap: string[]} {
+  private prepareSeats(): { seats: Seat[], seatsMap: string[] } {
     const seats: Seat[] = [];
     const seatsMap: string[] = [];
 
@@ -82,7 +81,7 @@ export class SeatFacadeService extends FacadeService {
       {id: 'g', offset: 936},
       {id: 'h', offset: 1080},
       {id: 'i', offset: 1176},
-      {id: 'j', offset: 1320},
+      {id: 'j', offset: 1320}
     ];
     const yAxis = [
       {id: 1, offset: 144},
@@ -91,49 +90,49 @@ export class SeatFacadeService extends FacadeService {
       {id: 4, offset: 480},
       {id: 5, offset: 576},
       {id: 6, offset: 672},
-      {id: 7, offset: 768},
+      {id: 7, offset: 768}
     ];
     const specialX = [
       {id: 'k', offset: 1416},
-      {id: 'l', offset: 1560},
+      {id: 'l', offset: 1560}
     ];
     const specialY = [
       {id: 1, offset: 48},
       {id: 2, offset: 144},
       {id: 3, offset: 240},
       {id: 4, offset: 672},
-      {id: 5, offset: 768},
+      {id: 5, offset: 768}
     ];
 
     // regular Rows
     xAxis.forEach((x) => {
       yAxis.forEach((y) => {
-        seat = `${x.id.toUpperCase()}${y.id.toString(10)}`
+        seat = `${ x.id.toUpperCase() }${ y.id.toString(10) }`;
         seatsMap.push(seat);
         seats.push({
           seat,
           x: x.offset,
-          y: y.offset,
+          y: y.offset
         });
-      })
+      });
     });
 
     // Rows K & L
     specialX.forEach((x) => {
       specialY.forEach((y) => {
-        seat = `${x.id.toUpperCase()}${y.id.toString(10)}`
+        seat = `${ x.id.toUpperCase() }${ y.id.toString(10) }`;
         seatsMap.push(seat);
         seats.push({
           seat,
           x: x.offset,
-          y: y.offset,
+          y: y.offset
         });
-      })
+      });
     });
 
     return {
       seats,
       seatsMap
-    }
+    };
   }
 }

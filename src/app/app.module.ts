@@ -20,7 +20,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   declarations: [
     AppComponent,
     RedirectComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -33,9 +33,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   ],
   providers: [
     httpInterceptorProviders,
-    { provide: AbstractAuthApiService, useClass: AuthApiService },
-    { provide: AbstractSeatApiService, useClass: SeatApiService },
+    {provide: AbstractAuthApiService, useClass: AuthApiService},
+    {provide: AbstractSeatApiService, useClass: SeatApiService}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -4,6 +4,9 @@
   box-shadow: 0 0 72px rgba(0, 0, 0, 0.26);
 }
 
+@mixin shadow-prominent() {
+  box-shadow: 0 0 36px rgba(0, 0, 0, 0.26);
+}
 @mixin drop-shadow {
   filter: drop-shadow(0 0 72px rgba(0, 0, 0, 0.26));
 }

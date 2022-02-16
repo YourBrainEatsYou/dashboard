@@ -10,7 +10,7 @@ export class ApiInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     if (!request.url.includes('://')) {
-      request = request.clone({ url: environment.apiUrl + request.url });
+      request = request.clone({url: environment.apiUrl + request.url});
     }
     return next.handle(request);
   }

@@ -35,7 +35,7 @@ export class IsAuthenticatedGuard implements CanActivateChild, CanActivate, CanL
 
     const [credentialsSet, needsLogin] = partition(
       this.authState$,
-      ({ accessToken, refreshToken, expiration }) =>
+      ({accessToken, refreshToken, expiration}) =>
         accessToken !== null
         && refreshToken !== null
         && expiration !== null
@@ -43,24 +43,24 @@ export class IsAuthenticatedGuard implements CanActivateChild, CanActivate, CanL
 
     return merge(
       credentialsSet.pipe(
-        tap(({ accessToken, refreshToken, expiration, refreshStarted }) => {
+        tap(({accessToken, refreshToken, expiration, refreshStarted}) => {
           if (
             accessToken !== null
             && refreshToken !== null
             && expiration !== null
             && (typeof refreshStarted === 'undefined' || refreshStarted === false)
           ) {
-            this.authFacadeService.initRenewOfAccessToken({ accessToken, refreshToken, expiration });
+            this.authFacadeService.initRenewOfAccessToken({accessToken, refreshToken, expiration});
           }
         }),
-        filter(({ refreshStarted, expiration }) =>
+        filter(({refreshStarted, expiration}) =>
           refreshStarted === true && expiration !== null && new Date(expiration) > new Date()
         ),
         map(() => of(true))
       ),
       needsLogin.pipe(map(() => this.authFacadeService.postLoginRequest().pipe(
         map((payload) => {
-          return this.router.createUrlTree(['/redirect', { externalUrl: payload.data.redirect }]);
+          return this.router.createUrlTree(['/redirect', {externalUrl: payload.data.redirect}]);
         })
       )))
     ).pipe(
