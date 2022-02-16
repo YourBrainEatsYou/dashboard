@@ -3,6 +3,7 @@
 :host{
   position: fixed;
   top: 96px;
+  left: 0;
   height: calc(100vh - (2.4rem * 4));
   overflow-y: auto;
   z-index: 101;

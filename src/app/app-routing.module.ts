@@ -11,30 +11,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canLoad: [
-      IsAuthenticatedGuard
-    ],
-    canActivate: [
-      IsAuthenticatedGuard
-    ],
-    canActivateChild: [
-      IsAuthenticatedGuard
-    ],
+    canLoad: [IsAuthenticatedGuard],
+    canActivate: [IsAuthenticatedGuard],
+    canActivateChild: [IsAuthenticatedGuard],
     runGuardsAndResolvers: 'always',
-  },
-  {
-    path: 'seatplan',
-    loadChildren: () => import('./pages/seatplan/seatplan.module').then((m) => m.SeatplanModule),
-    canLoad: [
-      IsAuthenticatedGuard
-    ],
-    canActivate: [
-      IsAuthenticatedGuard
-    ],
-    canActivateChild: [
-      IsAuthenticatedGuard
-    ],
-    runGuardsAndResolvers: 'always',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: 'auth/:token',

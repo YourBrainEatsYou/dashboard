@@ -1,3 +1,4 @@
+import { UserFacadeService } from "@/store/user/user-facade.service";
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,6 +6,13 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent{
+
+  user$ = this.userFacadeService.user$;
+
+  constructor(
+    private userFacadeService: UserFacadeService,
+  ) {
+  }
 
 }

@@ -12,4 +12,5 @@ export interface UserPayload {
   email: string;
   phone: string;
   hasOrder: boolean;
+  avatar: string;
 }
