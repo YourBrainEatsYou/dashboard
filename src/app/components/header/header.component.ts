@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent{
+export class HeaderComponent {
 
   user$ = this.userFacadeService.user$;
 
   constructor(
-    private userFacadeService: UserFacadeService,
+    private userFacadeService: UserFacadeService
   ) {
   }
 

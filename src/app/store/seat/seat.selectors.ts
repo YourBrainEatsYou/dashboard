@@ -11,5 +11,5 @@ export const {selectAll} = seatEntityAdapter.getSelectors(selectSeatState);
 
 export const selectIsPosting: MemoizedSelector<AppState, boolean> = createSelector(
   selectSeatState,
-  getIsPosting,
+  getIsPosting
 );

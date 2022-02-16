@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { NavigationComponent } from '../navigation/navigation.component';
-
 
 
 @NgModule({
@@ -17,4 +16,5 @@ import { NavigationComponent } from '../navigation/navigation.component';
     RouterModule
   ]
 })
-export class NavigationModule { }
+export class NavigationModule {
+}

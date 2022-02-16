@@ -26,7 +26,7 @@ export class AuthFacadeService {
   }
 
   setTokenCollection(tokenCollection: TokenCollection): void {
-    this.store.dispatch({ type: AuthStoreActions.setTokenCollection.type, tokenCollection });
+    this.store.dispatch({type: AuthStoreActions.setTokenCollection.type, tokenCollection});
   }
 
   postLoginRequest(): Observable<Payload<LoginRequestPayload>> {
@@ -50,6 +50,6 @@ export class AuthFacadeService {
   }
 
   initRenewOfAccessToken(tokenCollection: TokenCollection): void {
-    this.store.dispatch({ type: AuthStoreActions.initRenewalOfAccessToken.type, tokenCollection });
+    this.store.dispatch({type: AuthStoreActions.initRenewalOfAccessToken.type, tokenCollection});
   }
 }

@@ -18,48 +18,48 @@ export class AuthEffects {
 
   setTokenCollection$ = createEffect(() => this.actions$.pipe(
     ofType(setTokenCollection.type),
-    map(({ tokenCollection }) => {
-      const { accessToken, refreshToken, expiration } = tokenCollection;
+    map(({tokenCollection}) => {
+      const {accessToken, refreshToken, expiration} = tokenCollection;
 
 
       window.localStorage.setItem('iol-access-token', accessToken);
       window.localStorage.setItem('iol-refresh-token', refreshToken);
       window.localStorage.setItem('iol-expiration', expiration);
     })
-  ), { dispatch: false });
+  ), {dispatch: false});
 
   initRenewalOfAccessToken$ = createEffect(() => this.actions$.pipe(
     ofType(initRenewalOfAccessToken.type),
-    switchMap(({ tokenCollection }) => {
-      const { refreshToken, expiration } = tokenCollection;
+    switchMap(({tokenCollection}) => {
+      const {refreshToken, expiration} = tokenCollection;
 
       const expirationDate = new Date(expiration);
       const now = new Date();
 
       if (expirationDate < now) {
         // refresh Token immediately
-        return of({ type: renewAccessToken.type, refreshToken });
+        return of({type: renewAccessToken.type, refreshToken});
       } else {
         const ttl = Math.floor((expirationDate.getTime() - now.getTime()));
         // plan token refresh
-        return of({ type: renewAccessToken.type, refreshToken }).pipe(delay(ttl));
+        return of({type: renewAccessToken.type, refreshToken}).pipe(delay(ttl));
       }
     })
   ));
 
   renewAccessToken$ = createEffect(() => this.actions$.pipe(
     ofType(renewAccessToken.type),
-    mergeMap(({ refreshToken }) => this.authFacadeService.postKeyRenew({ token: refreshToken }).pipe(
+    mergeMap(({refreshToken}) => this.authFacadeService.postKeyRenew({token: refreshToken}).pipe(
       map((payload) => {
-        const { accessToken, expiration } = payload.data;
+        const {accessToken, expiration} = payload.data;
 
         window.localStorage.setItem('iol-access-token', accessToken);
         window.localStorage.setItem('iol-expiration', expiration.toString());
 
-        return { type: renewAccessTokenSuccess.type, tokenCollection: payload.data };
+        return {type: renewAccessTokenSuccess.type, tokenCollection: payload.data};
       }),
       catchError((error: HttpErrorResponse) => {
-        return of({ type: renewAccessTokenFailure.type, error });
+        return of({type: renewAccessTokenFailure.type, error});
       }))
     )
   ));
@@ -74,20 +74,20 @@ export class AuthEffects {
     tap(() => {
       void this.router.navigate(['/']);
     })
-  ), { dispatch: false });
+  ), {dispatch: false});
 
 
   renewAccessTokenSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(renewAccessTokenSuccess.type),
-    mergeMap(({ tokenCollection }) => {
-      const { refreshToken, expiration } = tokenCollection;
+    mergeMap(({tokenCollection}) => {
+      const {refreshToken, expiration} = tokenCollection;
 
       const expirationDate = new Date(expiration);
       const now = new Date();
       const ttl = Math.floor((expirationDate.getTime() - now.getTime()));
 
       // plan token refresh
-      return of({ type: renewAccessToken.type, refreshToken }).pipe(delay(ttl));
+      return of({type: renewAccessToken.type, refreshToken}).pipe(delay(ttl));
     })
   ));
 

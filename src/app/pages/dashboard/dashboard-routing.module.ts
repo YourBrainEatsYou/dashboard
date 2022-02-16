@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ''
   },
   {
     path: 'seatplan',
-    loadChildren: () => import('./seatplan/seatplan.module').then((m) => m.SeatplanModule),
+    loadChildren: () => import('./seatplan/seatplan.module').then((m) => m.SeatplanModule)
   }
 ];
 
@@ -15,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {
+}

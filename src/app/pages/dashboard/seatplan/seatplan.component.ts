@@ -12,7 +12,7 @@ import { Observable, takeUntil, Subject } from "rxjs";
   templateUrl: './seatplan.component.html',
   styleUrls: ['./seatplan.component.scss']
 })
-export class SeatplanComponent implements OnInit, OnDestroy{
+export class SeatplanComponent implements OnInit, OnDestroy {
   selectedSeat: Seat | null = null;
   seats$: Observable<Seat[]> = this.seatFacadeService.seats$;
 
@@ -28,8 +28,9 @@ export class SeatplanComponent implements OnInit, OnDestroy{
 
   constructor(
     private seatFacadeService: SeatFacadeService,
-    private actions$: Actions,
-  ) { }
+    private actions$: Actions
+  ) {
+  }
 
   ngOnInit() {
     this.actions$.pipe(
@@ -45,38 +46,38 @@ export class SeatplanComponent implements OnInit, OnDestroy{
     this.destroyed$.complete();
   }
 
-  onSeatSelection(seat: Seat): void{
-    if(this.selectedSeat && seat.seat === this.selectedSeat.seat){
+  onSeatSelection(seat: Seat): void {
+    if (this.selectedSeat && seat.seat === this.selectedSeat.seat) {
       this.selectedSeat = null;
-    }else if(seat.availability === SeatStatus.AVAILABLE){
+    } else if (seat.availability === SeatStatus.AVAILABLE) {
       this.selectedSeat = seat;
     }
   }
 
-  onReserveSeat(){
-    if(this.selectedSeat){
+  onReserveSeat() {
+    if (this.selectedSeat) {
       this.seatFacadeService.reserveSeat({seat: this.selectedSeat.seat});
     }
   }
 
-  onMouseEnter($event: MouseEvent, seat: Seat){
-    if($event.target){
-      if(seat.userData){
-        if(seat.userData.username){
+  onMouseEnter($event: MouseEvent, seat: Seat) {
+    if ($event.target) {
+      if (seat.userData) {
+        if (seat.userData.username) {
           this.tooltipUser$.next(seat.userData);
 
           // @ts-ignore
           const position = $event.target.getBoundingClientRect() as DOMRect;
 
-          if(this.tooltip && this.seatplan){
+          if (this.tooltip && this.seatplan) {
             const seatplanPosition = this.seatplan.nativeElement.getBoundingClientRect();
             this.tooltip.nativeElement.setAttribute(
               'style',
-              `top: ${(position.top - seatplanPosition.top + position.height / 2).toString()}px;
-           left: ${(position.left - seatplanPosition.left + position.width / 2).toString()}px;`
-            )
+              `top: ${ (position.top - seatplanPosition.top + position.height / 2).toString() }px;
+           left: ${ (position.left - seatplanPosition.left + position.width / 2).toString() }px;`
+            );
           }
-        }else{
+        } else {
         }
       }
     }

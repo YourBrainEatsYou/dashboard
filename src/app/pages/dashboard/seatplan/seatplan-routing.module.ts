@@ -6,8 +6,8 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: SeatplanComponent,
-  },
+    component: SeatplanComponent
+  }
 ];
 
 @NgModule({

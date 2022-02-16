@@ -6,7 +6,6 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { mergeMap, map, of, catchError } from "rxjs";
 
 
-
 @Injectable()
 export class SeatEffects {
 
@@ -16,15 +15,16 @@ export class SeatEffects {
       map(() => ({type: SeatStoreActions.reserveSeatSuccess.type, reserveSeatDto})),
       catchError((error: HttpErrorResponse) => of({
         type: SeatStoreActions.reserveSeatFailure.type,
-        error,
+        error
       }))
-    )),
+    ))
   ));
 
 
   constructor(
     private actions$: Actions,
-    private seatApiService: AbstractSeatApiService,
-  ) {}
+    private seatApiService: AbstractSeatApiService
+  ) {
+  }
 
 }

@@ -33,7 +33,7 @@ export const initialState: State = seatEntityAdapter.getInitialState({
   hasLoaded: false,
   error: null,
 
-  isPosting: false,
+  isPosting: false
 });
 
 export const reducer = createReducer(
@@ -73,36 +73,36 @@ export const reducer = createReducer(
   on(reserveSeat, (state: State) => {
     return {
       ...state,
-      isPosting: true,
-    }
+      isPosting: true
+    };
   }),
   on(reserveSeatSuccess, (state: State, {reserveSeatDto}) => {
     return seatEntityAdapter.map((entity) => {
-      if(entity.availability === SeatStatus.ME){
+      if (entity.availability === SeatStatus.ME) {
         return {
           ...entity,
           availability: SeatStatus.AVAILABLE
         };
       }
-      if(entity.seat === reserveSeatDto.seat){
+      if (entity.seat === reserveSeatDto.seat) {
         return {
           ...entity,
           availability: SeatStatus.ME
         };
       }
       return {
-        ...entity,
-      }
+        ...entity
+      };
     }, {
       ...state,
-      isPosting: false,
-    })
+      isPosting: false
+    });
 
   }),
   on(reserveSeatFailure, (state: State) => {
     return {
       ...state,
-      isPosting: false,
-    }
-  }),
+      isPosting: false
+    };
+  })
 );

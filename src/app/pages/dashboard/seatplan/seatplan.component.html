@@ -1,11 +1,14 @@
 <h1>book your seat</h1>
 
-<div class="seatplan-wrapper" #seatplan (mouseleave)="hideTooltip()" (click)="hideTooltip()">
-  <svg class="seatplan" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 960">
-    <g id="seats_mapped" *ngIf="(seats$ | async) as seats">
+<div #seatplan (click)="hideTooltip()" (mouseleave)="hideTooltip()" class="seatplan-wrapper">
+  <svg class="seatplan" viewBox="0 0 1920 960" xmlns="http://www.w3.org/2000/svg">
+    <g *ngIf="(seats$ | async) as seats" id="seats_mapped">
       <circle
+        (click)="onSeatSelection(seat)"
+        (mouseenter)="onMouseEnter($event, seat)"
         *ngFor="let seat of seats"
-        class="seat seat--available"
+        [attr.cx]="seat.x"
+        [attr.cy]="seat.y"
         [ngClass]="{
         'seat--active': selectedSeat && seat.seat === selectedSeat.seat,
         'seat--available': seat.availability === seatStatus.AVAILABLE,
@@ -14,11 +17,8 @@
         'seat--blocked': seat.availability === seatStatus.BLOCKED,
         'seat--squad': seat.availability === seatStatus.SQUAD
       }"
-        [attr.cx]="seat.x"
-        [attr.cy]="seat.y"
+        class="seat seat--available"
         r="17"
-        (click)="onSeatSelection(seat)"
-        (mouseenter)="onMouseEnter($event, seat)"
       />
     </g>
     <g id="legend">
@@ -67,7 +67,7 @@
       <path d="M163.185,777.375l5.37-13.8h-7.23l-.45-4.951h14.25v3.75l-5.79,15Z" />
     </g>
     <g id="areas">
-      <rect class="area" width="144.667" height="816" />
+      <rect class="area" height="816" width="144.667" />
       <path class="area-legend" d="M43.009,399.375h-6v-18.75h12.3l-.75,4.95h-5.55v2.85h5.1v4.35h-5.1Z" />
       <path class="area-legend"
             d="M51.349,384.12a5.418,5.418,0,0,1,2.775-3.03,12.861,12.861,0,0,1,5.385-.915,12.861,12.861,0,0,1,5.385.915,5.418,5.418,0,0,1,2.775,3.03,21.053,21.053,0,0,1,0,11.775,5.42,5.42,0,0,1-2.775,3.015,12.861,12.861,0,0,1-5.385.915,12.861,12.861,0,0,1-5.385-.915,5.42,5.42,0,0,1-2.775-3.015,21.053,21.053,0,0,1,0-11.775Zm8.34,10.575a3.553,3.553,0,0,0,1.86-.345,1.4,1.4,0,0,0,.51-1.245v-7.8H59.3a3.474,3.474,0,0,0-1.83.345,1.393,1.393,0,0,0-.51,1.245v7.8Z" />
@@ -86,13 +86,13 @@
       <path class="area-legend" d="M99.558,430.425h7.05v4.95H93.558v-18.75h13.2l-.75,4.95h-6.45v2.25h6v4.35h-6Z" />
       <path class="area-legend"
             d="M119.3,435.375l-2.55-5.43h-1.59v5.43h-6v-18.75h8.7q3.84,0,5.52,1.62t1.68,5.31q0,3.87-2.31,5.34l3.06,6.48Zm-4.14-9.78h2.43a1.236,1.236,0,0,0,.915-.27,1.46,1.46,0,0,0,.255-.99v-1.5a1.46,1.46,0,0,0-.255-.99,1.236,1.236,0,0,0-.915-.27h-2.43Z" />
-      <rect class="area" x="960" y="888" width="192" height="72" />
+      <rect class="area" height="72" width="192" x="960" y="888" />
       <path class="area-legend" d="M1033.726,928.425h7.049v4.95h-13.049v-18.75h13.2l-.75,4.95h-6.45v2.25h6v4.35h-6Z" />
       <path class="area-legend"
             d="M1053.915,933.375l-2.79-4.47-2.64,4.47h-6.509l5.759-9.87-5.549-8.88h6.659l2.58,4.14,2.43-4.14h6.51l-5.55,9.54,5.76,9.21Z" />
       <path class="area-legend" d="M1068.225,914.625v18.75h-6v-18.75Z" />
       <path class="area-legend" d="M1080.074,933.375h-6v-13.8h-4.2v-4.95h14.4v4.95h-4.2Z" />
-      <rect class="area" x="72" y="888" width="264" height="72" />
+      <rect class="area" height="72" width="264" x="72" y="888" />
       <path class="area-legend"
             d="M180.12,933.375h-6.36l-2.37-5.04a5.98,5.98,0,0,1-.75-2.4h-1.41v7.44h-6v-18.75h6v6.93h1.41a5.989,5.989,0,0,1,.75-2.4l2.22-4.53h6.36l-4.41,9.12Z" />
       <path class="area-legend" d="M187.77,914.625v18.75h-6v-18.75Z" />
@@ -102,7 +102,7 @@
             d="M208.32,918.12a5.418,5.418,0,0,1,2.775-3.03,16.3,16.3,0,0,1,10.77,0,5.418,5.418,0,0,1,2.775,3.03,21.053,21.053,0,0,1,0,11.775,5.42,5.42,0,0,1-2.775,3.015,16.3,16.3,0,0,1-10.77,0,5.42,5.42,0,0,1-2.775-3.015,21.053,21.053,0,0,1,0-11.775Zm8.34,10.575a3.555,3.555,0,0,0,1.86-.345,1.4,1.4,0,0,0,.51-1.245v-7.8h-2.76a3.472,3.472,0,0,0-1.83.345,1.393,1.393,0,0,0-.51,1.245v7.8Z" />
       <path class="area-legend"
             d="M244.77,933.375h-6.361l-2.369-5.04a5.964,5.964,0,0,1-.75-2.4h-1.41v7.44h-6v-18.75h6v6.93h1.41a5.972,5.972,0,0,1,.75-2.4l2.22-4.53h6.36l-4.41,9.12Z" />
-      <rect class="area" x="1632" y="480" width="288" height="480" />
+      <rect class="area" height="480" width="288" x="1632" y="480" />
       <path class="area-legend"
             d="M1742.85,708.405h-5.43l-.75,2.97h-6l4.8-18.75h9.33l4.8,18.75h-6Zm-1.14-4.35-1.44-5.67H1740l-1.44,5.67Z" />
       <path class="area-legend"
@@ -119,7 +119,7 @@
       <path class="area-legend" d="M1785.825,742.425h7.05v4.95h-13.05v-18.75h13.2l-.75,4.95h-6.45v2.25h6v4.35h-6Z" />
       <path class="area-legend"
             d="M1806.254,744.405h-5.429l-.75,2.97h-6l4.8-18.75h9.33l4.8,18.75h-6Zm-1.139-4.35-1.441-5.67h-.269l-1.441,5.67Z" />
-      <rect class="area" x="1632" width="288" height="480" />
+      <rect class="area" height="480" width="288" x="1632" />
       <path class="area-legend"
             d="M1735.215,226.98a15.634,15.634,0,0,0,2.43-.149V225.18l-2.7-.24a11.509,11.509,0,0,1-3.735-.855,4.161,4.161,0,0,1-2.025-1.845,6.706,6.706,0,0,1-.63-3.12,9.084,9.084,0,0,1,.72-3.975,4.257,4.257,0,0,1,2.325-2.1,12.228,12.228,0,0,1,4.425-.645,27.136,27.136,0,0,1,7.05.9l-.75,4.8q-1.56-.33-2.64-.465a17.887,17.887,0,0,0-2.22-.135,16.1,16.1,0,0,0-2.46.15v1.62l2.16.21a9.3,9.3,0,0,1,5.3,1.815,5.5,5.5,0,0,1,1.635,4.335,5.887,5.887,0,0,1-1.92,4.875q-1.92,1.547-6.06,1.545a26.948,26.948,0,0,1-7.83-1.08l.84-4.95A19.839,19.839,0,0,0,1735.215,226.98Z" />
       <path class="area-legend"
@@ -138,35 +138,35 @@
             d="M1805.879,264.63h-5.43l-.75,2.97h-6l4.8-18.75h9.329l4.8,18.75h-6Zm-1.14-4.35-1.44-5.67h-.27l-1.44,5.67Z" />
     </g>
     <g id="tables">
-      <rect class="table" x="240" y="96" width="48" height="288" />
-      <rect class="table" x="288" y="96" width="48" height="288" />
-      <rect class="table" x="480" y="96" width="48" height="288" />
-      <rect class="table" x="528" y="96" width="48" height="288" />
-      <rect class="table" x="720" y="96" width="48" height="288" />
-      <rect class="table" x="768" y="96" width="48" height="288" />
-      <rect class="table" x="960" y="96" width="48" height="288" />
-      <rect class="table" x="1008" y="96" width="48" height="288" />
-      <rect class="table" x="1200" y="96" width="48" height="288" />
-      <rect class="table" x="1248" y="96" width="48" height="288" />
-      <rect class="table" x="1440" width="48" height="288" />
-      <rect class="table" x="1488" width="48" height="288" />
-      <rect class="table" x="240" y="432" width="48" height="384" />
-      <rect class="table" x="288" y="432" width="48" height="384" />
-      <rect class="table" x="480" y="432" width="48" height="384" />
-      <rect class="table" x="528" y="432" width="48" height="384" />
-      <rect class="table" x="720" y="432" width="48" height="384" />
-      <rect class="table" x="768" y="432" width="48" height="384" />
-      <rect class="table" x="960" y="432" width="48" height="384" />
-      <rect class="table" x="1008" y="432" width="48" height="384" />
-      <rect class="table" x="1200" y="432" width="48" height="384" />
-      <rect class="table" x="1248" y="432" width="48" height="384" />
-      <rect class="table" x="1440" y="624" width="48" height="192" />
-      <rect class="table" x="1488" y="624" width="48" height="192" />
+      <rect class="table" height="288" width="48" x="240" y="96" />
+      <rect class="table" height="288" width="48" x="288" y="96" />
+      <rect class="table" height="288" width="48" x="480" y="96" />
+      <rect class="table" height="288" width="48" x="528" y="96" />
+      <rect class="table" height="288" width="48" x="720" y="96" />
+      <rect class="table" height="288" width="48" x="768" y="96" />
+      <rect class="table" height="288" width="48" x="960" y="96" />
+      <rect class="table" height="288" width="48" x="1008" y="96" />
+      <rect class="table" height="288" width="48" x="1200" y="96" />
+      <rect class="table" height="288" width="48" x="1248" y="96" />
+      <rect class="table" height="288" width="48" x="1440" />
+      <rect class="table" height="288" width="48" x="1488" />
+      <rect class="table" height="384" width="48" x="240" y="432" />
+      <rect class="table" height="384" width="48" x="288" y="432" />
+      <rect class="table" height="384" width="48" x="480" y="432" />
+      <rect class="table" height="384" width="48" x="528" y="432" />
+      <rect class="table" height="384" width="48" x="720" y="432" />
+      <rect class="table" height="384" width="48" x="768" y="432" />
+      <rect class="table" height="384" width="48" x="960" y="432" />
+      <rect class="table" height="384" width="48" x="1008" y="432" />
+      <rect class="table" height="384" width="48" x="1200" y="432" />
+      <rect class="table" height="384" width="48" x="1248" y="432" />
+      <rect class="table" height="192" width="48" x="1440" y="624" />
+      <rect class="table" height="192" width="48" x="1488" y="624" />
     </g>
   </svg>
 
-  <div class="tooltip-outer" #tooltip>
-    <div class="tooltip" *ngIf="(tooltipUser$ | async) as user">
+  <div #tooltip class="tooltip-outer">
+    <div *ngIf="(tooltipUser$ | async) as user" class="tooltip">
       <div class="tooltip--avatar">
         <img [src]="user.avatar" alt="">
       </div>
@@ -181,10 +181,10 @@
 </div>
 
 
-<div class="card card--dense selection" *ngIf="selectedSeat">
+<div *ngIf="selectedSeat" class="card card--dense selection">
   <div class="selected-seat">Seat: {{selectedSeat.seat}}</div>
-  <button class="button button--primary" (click)="onReserveSeat()" [disabled]="(isPosting$ | async)"
-          [ngClass]="{'button--loading': (isPosting$ | async)}">
+  <button (click)="onReserveSeat()" [disabled]="(isPosting$ | async)" [ngClass]="{'button--loading': (isPosting$ | async)}"
+          class="button button--primary">
     Save
   </button>
 </div>

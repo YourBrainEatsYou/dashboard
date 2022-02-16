@@ -30,7 +30,7 @@ export const reducer = createReducer(
       error: null
     };
   }),
-  on(loadUserSuccess, (state, { payload }) => {
+  on(loadUserSuccess, (state, {payload}) => {
     return {
       ...state,
       user: payload.data,
@@ -39,7 +39,7 @@ export const reducer = createReducer(
       error: null
     };
   }),
-  on(loadUserFailure, (state, { error }) => {
+  on(loadUserFailure, (state, {error}) => {
     return {
       ...state,
       user: null,

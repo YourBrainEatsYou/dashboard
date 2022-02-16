@@ -1,58 +1,59 @@
 @use "abstracts" as *;
 
-:host{
+:host {
   position: fixed;
+  z-index: 101;
   top: 96px;
   left: 0;
-  height: calc(100vh - (2.4rem * 4));
   overflow-y: auto;
-  z-index: 101;
   width: (2.4rem * 19);
+  height: calc(100vh - (2.4rem * 4));
 }
 
-ul{
-  list-style: none;
+ul {
   margin: 0;
   padding: (2 * 2.4rem) 0 0 0;
+  list-style: none;
 }
-li{
+
+li {
   padding: 0;
 }
 
-.navigation-item{
-  width: (2.4rem * 14);
+.navigation-item {
   font-size: 1.5em;
-  line-height: 1;
-  height: (3 * 2.4rem);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
   font-weight: $font-weight-bold;
+  line-height: 1;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  width: (2.4rem * 14);
+  height: (3 * 2.4rem);
+  margin-bottom: (2 * 1.2rem);
   padding: 2.4rem 0 2.4rem (3 * 2.4rem);
   color: $color-black;
-  margin-bottom: (2 * 1.2rem);
 
-  &:before{
-    content: '';
+  &:before {
     position: absolute;
-    height: (1.5 * 2.4rem);
-    width: (1.5 * 2.4rem);
-    left: 0;
     top: 50%;
+    left: 0;
+    width: (1.5 * 2.4rem);
+    height: (1.5 * 2.4rem);
+    content: '';
     transform: translateX(-50%) translateY(-50%);
     border-radius: 50%;
     @include primary-gradient;
 
   }
 
-  &.active{
-    background-color: $color-white;
-    @include drop-shadow;
+  &.active {
     border-radius: 0 (2 * 2.4rem) (2 * 2.4rem) 0;
+    @include drop-shadow;
+    background-color: $color-white;
 
-    &:before{
+    &:before {
       left: 100%;
       transform: translateX(-150%) translateY(-50%);
     }

@@ -11,113 +11,116 @@
   }
 }
 
-.seatplan-wrapper{
+.seatplan-wrapper {
   position: relative;
 }
 
-.selection{
-  margin-top: (2.4rem * 2);
+.selection {
   position: sticky;
   bottom: 2.4rem;
-  width: 33%;
   left: 50%;
-
   display: flex;
+  align-items: center;
+
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  width: 33%;
+  margin-top: (2.4rem * 2);
 
   animation: slideFromBottom 0.15s ease-in-out forwards;
 }
-.selected-seat{
+
+.selected-seat {
   font-size: 1.5em;
   font-weight: $font-weight-bold;
 }
 
 // svg styles
-.seat{
+.seat {
 
   transition: fill ease-in-out 0.15s;
 
-  &--available{
-    fill: $color-gray;
+  &--available {
     cursor: pointer;
+    fill: $color-gray;
 
-    &:hover{
+    &:hover {
       fill: rgba($color-primary-accent, 0.5);
     }
   }
 
-  &--taken{
+  &--taken {
     fill: $color-primary-dark;
   }
 
-  &--me{
+  &--me {
     fill: $color-primary-light;
   }
 
-  &--blocked{
+  &--blocked {
     cursor: not-allowed;
     stroke: $color-gray;
     fill: $color-white;
     stroke-width: 2;
   }
 
-  &--squad{
+  &--squad {
     fill: $color-secondary-dark;
   }
 
-  &--active{
+  &--active {
     fill: $color-primary-accent !important;
   }
 }
 
 .area,
-.table{
+.table {
   fill: $color-primary-dark;
 }
 
-.area-legend{
+.area-legend {
   fill: $color-white;
 }
 
-.tooltip-outer{
-  transform: translateX(-50%) translateY(50%);
-  transition: all 0.15s ease-in-out;
+.tooltip-outer {
   position: absolute;
+  transition: all 0.15s ease-in-out;
+  transform: translateX(-50%) translateY(50%);
 }
 
-.tooltip{
+.tooltip {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 1.2rem;
+  flex-direction: row;
   padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+  white-space: nowrap;
   @include shadow();
   border-radius: 3rem;
   background-color: $color-white;
 
-  white-space: nowrap;
+  gap: 1.2rem;
 
-  &:before{
-    content: '';
-    height: 1.8rem;
-    width: 1.8rem;
-    transform-origin: center center;
-    transform: translateX(-50%) translateY(-50%) rotate(45deg) ;
-    background-color: $color-white;
+  &:before {
     position: absolute;
     top: 0;
     left: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    content: '';
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform-origin: center center;
+    background-color: $color-white;
   }
-  &--avatar{
+
+  &--avatar {
     position: relative;
+    z-index: 1;
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 50%;
-    z-index: 1;
   }
-  &--username{
+
+  &--username {
     position: relative;
     z-index: 1;
   }

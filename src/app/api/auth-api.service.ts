@@ -23,21 +23,21 @@ export class AuthApiService implements AbstractAuthApiService {
   postLoginRequest(loginRequestDto: LoginRequestDto): Observable<Payload<LoginRequestPayload>> {
     return this.http.post<Payload<LoginRequestPayload>>(
       this.ssoUrl + '/auth/request',
-      { ...loginRequestDto }
+      {...loginRequestDto}
     ).pipe(first());
   }
 
   postKeyExchange(keyExchangeDto: KeyExchangeDto): Observable<Payload<TokenCollection>> {
     return this.http.post<Payload<TokenCollection>>(
       this.ssoUrl + '/key/exchange',
-      { ...keyExchangeDto }
+      {...keyExchangeDto}
     );
   }
 
   postKeyRenew(keyRenewDto: KeyRenewDto): Observable<Payload<TokenCollection>> {
     return this.http.post<Payload<TokenCollection>>(
       this.ssoUrl + '/key/renew',
-      { ...keyRenewDto }
+      {...keyRenewDto}
     );
   }
 
