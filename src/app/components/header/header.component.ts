@@ -1,3 +1,4 @@
+import { UserFacadeService } from "@/store/user/user-facade.service";
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  user$ = this.userFacadeService.user$;
+
+  constructor(
+    private userFacadeService: UserFacadeService
+  ) {
+  }
 
 }

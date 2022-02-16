@@ -1,8 +1,12 @@
 @use "abstracts" as *;
 
 .card {
-  padding: 48px;
+  padding: (2.4rem * 2);
   background: white;
   @include border-radius;
   @include shadow;
+
+  &--dense{
+    padding: 2.4rem;
+  }
 }

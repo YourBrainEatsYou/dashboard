@@ -10,15 +10,15 @@ export class NavigationComponent {
   navigation = [
     {
       name: 'Dashboard',
-      path: '/dashboard'
+      path: '/dashboard/my'
     },
     {
       name: 'Seatplan',
-      path: '/seatplan'
+      path: '/dashboard/seatplan'
     },
     {
       name: 'Ticket',
-      path: '/ticket'
+      path: '/dashboard/ticket'
     }
   ];
 }

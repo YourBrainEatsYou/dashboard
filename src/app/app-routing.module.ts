@@ -11,16 +11,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canLoad: [
-      IsAuthenticatedGuard
-    ],
-    canActivate: [
-      IsAuthenticatedGuard
-    ],
-    canActivateChild: [
-      IsAuthenticatedGuard
-    ],
+    canLoad: [IsAuthenticatedGuard],
+    canActivate: [IsAuthenticatedGuard],
+    canActivateChild: [IsAuthenticatedGuard],
     runGuardsAndResolvers: 'always',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule)
   },
   {
     path: 'auth/:token',
@@ -34,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'dashboard'
   }
 ];
 
@@ -53,4 +48,5 @@ const routes: Routes = [
     }
   ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

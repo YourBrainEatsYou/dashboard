@@ -1,59 +1,61 @@
 @use "abstracts" as *;
 
-:host{
+:host {
   position: fixed;
-  top: 96px;
-  height: calc(100vh - 96px);
-  overflow-y: auto;
   z-index: 101;
-  min-width: 450px;
+  top: 96px;
+  left: 0;
+  overflow-y: auto;
+  width: (2.4rem * 19);
+  height: calc(100vh - (2.4rem * 4));
 }
 
-ul{
+ul {
+  margin: 0;
+  padding: (2 * 2.4rem) 0 0 0;
   list-style: none;
-  margin: (2 * 2.4rem) 0;
-  padding: 0;
 }
-li{
+
+li {
   padding: 0;
 }
 
-.navigation-item{
-  max-width: 350px;
-  font-size: 3rem;
-  line-height: 1;
-  height: (3 * 2.4rem);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
+.navigation-item {
+  font-size: 1.5em;
   font-weight: $font-weight-bold;
+  line-height: 1;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  width: (2.4rem * 14);
+  height: (3 * 2.4rem);
+  margin-bottom: (2 * 1.2rem);
   padding: 2.4rem 0 2.4rem (3 * 2.4rem);
   color: $color-black;
-  margin-bottom: 2.4rem;
 
-  &:before{
-    content: '';
+  &:before {
     position: absolute;
-    height: 1em;
-    width: 1em;
-    left: 0;
     top: 50%;
+    left: 0;
+    width: (1.5 * 2.4rem);
+    height: (1.5 * 2.4rem);
+    content: '';
     transform: translateX(-50%) translateY(-50%);
     border-radius: 50%;
     @include primary-gradient;
 
   }
 
-  &.active{
-    background-color: $color-white;
+  &.active {
+    border-radius: 0 (2 * 2.4rem) (2 * 2.4rem) 0;
     @include drop-shadow;
-    border-radius: 0 4.8rem 4.8rem 0;
+    background-color: $color-white;
 
-    &:before{
+    &:before {
       left: 100%;
-      transform: translateX(-175%) translateY(-50%);
+      transform: translateX(-150%) translateY(-50%);
     }
   }
 }

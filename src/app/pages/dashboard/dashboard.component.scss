@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  max-width: calc(1600px + (2.4rem * 16) + (2.4rem * 3));
+  min-height: 100vh;
+  padding-top: (2.4rem * 6);
+  padding-right: (2.4rem * 3);
+  padding-bottom: (2.4rem * 3);
+  padding-left: (2.4rem * 16);
+}

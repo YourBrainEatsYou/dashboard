@@ -3,24 +3,19 @@
 
 :host {
   position: fixed;
-  width: 100%;
   z-index: 100;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  padding: 24px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.4rem (3 * 2.4rem);
   background-color: $color-white;
   @include shadow;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
 .title {
   display: flex;
@@ -29,7 +24,7 @@
   color: currentColor;
 
   .icon {
-    padding: 6px;
+    padding-right: 6px;
 
     span {
       font-size: 26px;
@@ -46,6 +41,7 @@
 
     @include for-tablet-landscape-up {
       font-size: 30px;
+      line-height: 4.8rem;
     }
   }
 }
