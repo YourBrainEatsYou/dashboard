@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'seatplan',
     loadChildren: () => import('./seatplan/seatplan.module').then((m) => m.SeatplanModule)
+  },
+  {
+    path: 'ticket',
+    loadChildren: () => import('./ticket/ticket.module').then((m) => m.TicketModule)
   }
 ];
 
