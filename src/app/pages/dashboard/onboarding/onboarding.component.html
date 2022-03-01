@@ -1,0 +1,27 @@
+<ng-container *ngIf="(onboarding$ | async) as onboarding">
+  <div *ngIf="!onboarding.steps.hasOrder" class="card">
+    <h3>Bestelle dir dein Ticket</h3>
+    <p>Du besitzt noch kein Ticket für die nächste IOL!</p>
+    <p>Bestelle dir noch heute eins!</p>
+
+    <a [routerLink]="['/redirect', {externalUrl: 'https://shop.isleoflan.ch'}]"
+       class="button button--card button--primary">Zum Shop</a>
+  </div>
+
+  <div *ngIf="onboarding.steps.hasOrder && !onboarding.steps.ticketPayed" class="card">
+    <h3>Deine Bestellung ist noch nicht bezahlt</h3>
+    <p>Sobald deine Bezahlung bei uns eingegangen ist, kannst du deinen Sitzplatz auswählen</p>
+  </div>
+
+  <div *ngIf="onboarding.steps.ticketPayed && !onboarding.steps.hasSeat" class="card">
+    <h3>Suche dir einen Sitzplatz</h3>
+    <p>Sichere dir noch heute den besten Platz für die IOL!</p>
+    <a [routerLink]="['/dashboard/seatplan']" class="button button--card button--primary">Sitzplatz buchen</a>
+  </div>
+
+  <div *ngIf="onboarding.steps.ticketPayed && onboarding.steps.hasSeat" class="card">
+    <h3>Ready to Frag!</h3>
+    <p>Lehn dich zurück und fiebere gemeinsam mit uns dem Beginn der IOL zu!</p>
+  </div>
+</ng-container>
+
