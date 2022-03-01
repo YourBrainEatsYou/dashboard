@@ -3,7 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: ''
+    path: '',
+    redirectTo: 'my'
+  },
+  {
+    path: 'my',
+    loadChildren: () => import('./onboarding/onboarding.module').then((m) => m.OnboardingModule)
   },
   {
     path: 'seatplan',
